@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNG" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="com.vmo.nopcommerce.helper.TestNGListener">
+        </listener>
+    </listeners>
+    <test name="suite NopCommerce">
+        <parameter name="runType" value="CHROME"/>
+        <parameter name="browser" value="H_CHROME"/>
+        <classes>
+            <class name="com.vmo.nopcommerce.feature.login.TestCasesNopCommerce">
+                <methods>
+                    <include name="UserRegistration"/>
+                    <include name="ProductSearch"/>
+                    <include name="ProductSortingAndFiltering"/>
+                    <include name="PasswordRecovery"/>
+                    <include name="ReadNewsAndLeaveComment"/>
+                    <include name="ChangeExchange"/>
+                    <include name="ClickOnOneOfTheSocialMedia"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="suite SauceDemo">
+        <parameter name="runType" value="CHROME"/>
+        <parameter name="browser" value="H_CHROME"/>
+        <classes>
+            <class name="com.vmo.saucedemo.feature.login.TestCasesSauceDemo">
+            </class>
+        </classes>
+    </test>
+</suite>
