@@ -16,18 +16,12 @@ public class BaseTest {
 
     private WebDriver driver;
 
-    public WebDriver getBrowserDriver(String browser, String runType) {
-        if (runType.equals("CHROME")) {
-            driver = new LocalFactory().createDriver(browser);
-            Log.allure("open browser " + browser);
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
-            return driver;
-        } else {
-            driver = new GridFactory().createDriver(runType);
-            Log.allure("open browser " + runType);
-            return driver;
-        }
+    public WebDriver getBrowserDriver(String browser) {
+        driver = new LocalFactory().createDriver(browser);
+        Log.allure("open browser " + browser);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
+        return driver;
     }
 
     public WebDriver getDriver() {

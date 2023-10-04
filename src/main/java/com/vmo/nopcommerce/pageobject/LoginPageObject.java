@@ -18,10 +18,4 @@ public class LoginPageObject extends BasePage {
     public LoginPageObject(WebDriver driver) {
         this.driver = driver;
     }
-
-    public PasswordRecoveryPageObject goToPasswordRecovery() {
-        clickToElement(driver, LoginPageUI.FORGOTPW_BTN);
-        Log.allure("navigate to Password Recovery page");
-        return new PasswordRecoveryPageObject(driver);
-    }
 }
