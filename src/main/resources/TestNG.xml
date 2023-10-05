@@ -2,14 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestNG" parallel="tests" thread-count="2">
     <listeners>
-        <listener class-name="com.vmo.nopcommerce.helper.TestNGListener">
+        <listener class-name="com.vmo.demowebshop.helper.TestNGListener">
         </listener>
     </listeners>
     <test name="suite NopCommerce">
         <parameter name="runType" value="CHROME"/>
         <parameter name="browser" value="H_CHROME"/>
         <classes>
-            <class name="com.vmo.nopcommerce.feature.login.TestCasesAssignment">
+            <class name="com.vmo.demowebshop.TestCasesAssignment">
                 <methods>
                     <include name="UserRegistration"/>
                     <include name="ProductSearch"/>
