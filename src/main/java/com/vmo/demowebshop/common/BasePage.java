@@ -399,6 +399,10 @@ public class BasePage {
         jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
+    public void scrollToTopPage(WebDriver driver) {
+        jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0);");
+    }
 
     public void navigateToUrlByJS(WebDriver driver, String url) {
         jsExecutor = (JavascriptExecutor) driver;

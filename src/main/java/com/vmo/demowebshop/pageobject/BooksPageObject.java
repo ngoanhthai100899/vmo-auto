@@ -21,7 +21,7 @@ public class BooksPageObject extends BasePage {
         return driver.findElement(By.xpath(String.format(BooksPageUI.SHOPPINGCART_QTY,value))).isDisplayed();
     }
     public boolean isMsgAddProductDisplayed(String msg1, String msg2) {
-        Log.allure("verify the 1st part of add product msg is displayed");
+        Log.allure("verify the msg add product is displayed");
         return (driver.findElement(By.xpath(String.format(BooksPageUI.ADDPRODUCT_MSG1,msg1))).isDisplayed() && driver.findElement(By.xpath(String.format(BooksPageUI.ADDPRODUCT_MSG2,msg2))).isDisplayed());
     }
     public void addThe1stHighestRatingProduct(){
@@ -33,6 +33,7 @@ public class BooksPageObject extends BasePage {
         clickToElement(driver,BooksPageUI.ADDTOCART_BTN_2NDHIGHESTRATING);
     }
     public void hoverToShoppingCart(){
+        Log.allure("hover to shopping cart button");
         hoverMouseToElement(driver,BooksPageUI.SHOPPINGCART);
     }
 }

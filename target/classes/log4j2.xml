@@ -18,7 +18,7 @@
             <PatternLayout pattern="${pattern}" />
         </File>
 
-        <TestNGAppender name="com.vmo.nopcommerce.helper.TestNGAppender">
+        <TestNGAppender name="com.vmo.demowebshop.helper.TestNGAppender">
             <PatternLayout pattern="${pattern}" />
         </TestNGAppender>
     </Appenders>

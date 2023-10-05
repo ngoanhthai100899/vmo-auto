@@ -14,6 +14,8 @@ public class TestCasesAssignment extends BaseTest {
     protected HomePageObject homePage;
     protected LoginPageObject loginPage;
     protected BooksPageObject booksPage;
+    protected ShoppingCartPageObject shoppingCartPage;
+    protected DigitalDownloadsPageObject digitalDownloadsPage;
     public WebDriver driver;
 
     @BeforeMethod
@@ -43,27 +45,52 @@ public class TestCasesAssignment extends BaseTest {
         loginPage = homePage.goToLogin();
         Assert.assertTrue(loginPage.verifyIsOnLoginPage());
     }
+
     @Test(priority = 2)
-    public void Buy2HighestRatedBooks(){
+    public void Buy2HighestRatedBooks() {
         homePage = PageGenerator.getHomePageObject(getDriver());
         homePage.goToHomePage();
         Assert.assertTrue(homePage.isOnHomePage());
         booksPage = homePage.goToBooksPage();
         Assert.assertTrue(booksPage.isOnBooksPage());
         booksPage.addThe1stHighestRatingProduct();
-        Assert.assertTrue(booksPage.isMsgAddProductDisplayed("The product has been added to your ","shopping cart"));
+        Assert.assertTrue(booksPage.isMsgAddProductDisplayed("The product has been added to your ", "shopping cart"));
         booksPage.addThe2ndHighestRatingProduct();
-        Assert.assertTrue(booksPage.isMsgAddProductDisplayed("The product has been added to your ","shopping cart"));
+        Assert.assertTrue(booksPage.isMsgAddProductDisplayed("The product has been added to your ", "shopping cart"));
         Assert.assertTrue(booksPage.isShoppingCartIncreaseTheAmount("2"));
         booksPage.hoverToShoppingCart();
     }
+
     @Test(priority = 3)
-    public void RemoveItemsOutOfShoppingCart(){
+    public void RemoveItemsOutOfShoppingCart() throws InterruptedException{
         homePage = PageGenerator.getHomePageObject(getDriver());
         homePage.goToHomePage();
         Assert.assertTrue(homePage.isOnHomePage());
-        homePage.add1stItem();
-        homePage.add2ndItem();
-        homePage.add3rdItem();
+        homePage.addItem("14.1-inch Laptop");
+        Assert.assertTrue(homePage.isMsgAddProductDisplayed("The product has been added to your ", "shopping cart"));
+        homePage.addItem("Build your own cheap computer");
+        homePage.clickAddToCart2ndItem();
+        Assert.assertTrue(homePage.isMsgAddProductDisplayed("The product has been added to your ", "shopping cart"));
+        homePage.goToHomePage();
+        homePage.addItem("Build your own computer");
+        homePage.selectHDDOption("320 GB ");
+        homePage.clickAddToCart3rdItem();
+        Assert.assertTrue(homePage.isMsgAddProductDisplayed("The product has been added to your ", "shopping cart"));
+        Assert.assertTrue(homePage.isShoppingCartIncreaseTheAmount("3"));
+        homePage.scrollToTop();
+        shoppingCartPage = homePage.goToShoppingCart();
+        shoppingCartPage.isOnShoppingCartPage();
+        shoppingCartPage.selectItem("14.1-inch Laptop");
+        shoppingCartPage.clickUpdateCart();
+        Assert.assertFalse(shoppingCartPage.isItemPresent("14.1-inch Laptop"));
+        Assert.assertTrue(homePage.isShoppingCartIncreaseTheAmount("2"));
+    }
+    @Test(priority = 4)
+    public void BuyItemSuccessfully(){
+        homePage = PageGenerator.getHomePageObject(getDriver());
+        homePage.goToHomePage();
+        Assert.assertTrue(homePage.isOnHomePage());
+        digitalDownloadsPage = homePage.goToDigitalDownloadsPage();
+        Assert.assertTrue(digitalDownloadsPage.isOnDigitalDownloadsPage());
     }
 }

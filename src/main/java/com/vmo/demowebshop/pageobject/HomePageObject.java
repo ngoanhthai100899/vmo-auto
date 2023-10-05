@@ -35,24 +35,33 @@ public class HomePageObject extends BasePage {
 
     public BooksPageObject goToBooksPage() {
         Log.allure("navigate to Books page");
-        clickToElement(driver, BooksPageUI.BOOKS_TAG);
+        clickToElement(driver, HomePageUI.BOOKS_TAG);
         return new BooksPageObject(driver);
     }
-
-    public void add1stItem() {
-        clickToElement(driver, HomePageUI.ADDTOCART_1ST_ITEM);
+    public DigitalDownloadsPageObject goToDigitalDownloadsPage() {
+        Log.allure("navigate to Digital Downloads page");
+        clickToElement(driver, HomePageUI.DIGITAL_DOWNLOADS_TAG);
+        return new DigitalDownloadsPageObject(driver);
     }
 
-    public void add2ndItem() {
-        clickToElement(driver, HomePageUI.ADDTOCART_2ND_ITEM);
+    public void addItem(String itemName) {
+        Log.allure("add item: " + itemName);
+        clickToElement(driver, String.format(HomePageUI.ADDTOCART_ITEM, itemName));
     }
 
-    public void add3rdItem() {
-        clickToElement(driver, HomePageUI.ADDTOCART_3RD_ITEM);
+    public void clickAddToCart2ndItem() {
+        Log.allure("click button add to cart when in 2nd item details");
+        clickToElement(driver, HomePageUI.ADDTOCART_2ND_ITEM_BTN);
     }
+
+    public void clickAddToCart3rdItem() {
+        Log.allure("click button add to cart when in 3rd item details");
+        clickToElement(driver, HomePageUI.ADDTOCART_3RD_ITEM_BTN);
+    }
+
     public boolean isMsgAddProductDisplayed(String msg1, String msg2) {
-        Log.allure("verify the 1st part of add product msg is displayed");
-        return (driver.findElement(By.xpath(String.format(BooksPageUI.ADDPRODUCT_MSG1,msg1))).isDisplayed() && driver.findElement(By.xpath(String.format(BooksPageUI.ADDPRODUCT_MSG2,msg2))).isDisplayed());
+        Log.allure("verify the msg add product is displayed: " + msg1 + msg2);
+        return (driver.findElement(By.xpath(String.format(HomePageUI.ADDPRODUCT_MSG1, msg1))).isDisplayed() && driver.findElement(By.xpath(String.format(HomePageUI.ADDPRODUCT_MSG2, msg2))).isDisplayed());
     }
 
     public String Username(XSSFRow row) {
@@ -63,5 +72,25 @@ public class HomePageObject extends BasePage {
     public void Password(XSSFRow row) {
         Log.allure("Input password");
         sendKeyToElement(driver, HomeSauceDemoPageUI.PW, row.getCell(2).toString());
+    }
+
+    public void selectHDDOption(String HddOption) {
+        Log.allure("select HDD Option: " + HddOption);
+        clickToElement(driver, String.format(HomePageUI.HDD_BTN, HddOption));
+    }
+
+    public boolean isShoppingCartIncreaseTheAmount(String value) {
+        Log.allure("verify shopping cart increases the amount");
+        return driver.findElement(By.xpath(String.format(HomePageUI.SHOPPINGCART_QTY, value))).isDisplayed();
+    }
+
+    public ShoppingCartPageObject goToShoppingCart() {
+        Log.allure("navigate to Shopping Cart page");
+        clickToElement(driver, HomePageUI.SHOPPINGCART_BTN);
+        return new ShoppingCartPageObject(driver);
+    }
+
+    public void scrollToTop() {
+        scrollToTopPage(driver);
     }
 }

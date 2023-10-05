@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Platform;
 public class ExcelUtil {
     public static final String       testDataExcelFileName = "assignment.xlsx"; //Global test data excel file
-    public static final String       currentDir            = System.getProperty("C:\\Users\\Ngo Anh Thai\\vmo-auto");  //Main Directory of the project
+    public static final String       currentDir            = System.getProperty("C:\\Users\\ngoan\\Desktop\\vmo-auto");  //Main Directory of the project
     public static       String       testDataExcelPath     = "src\\main\\resources\\"; //Location of Test data excel file
     private static      XSSFWorkbook excelWBook; //Excel WorkBook
     private static      XSSFSheet    excelWSheet; //Excel Sheet
