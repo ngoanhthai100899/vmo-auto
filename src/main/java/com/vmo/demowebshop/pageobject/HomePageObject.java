@@ -2,9 +2,7 @@ package com.vmo.demowebshop.pageobject;
 
 import com.vmo.demowebshop.common.BasePage;
 import com.vmo.demowebshop.helper.Log;
-import com.vmo.demowebshop.interfaces.BooksPageUI;
 import com.vmo.demowebshop.interfaces.HomePageUI;
-import com.vmo.demowebshop.interfaces.HomeSauceDemoPageUI;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -69,10 +67,6 @@ public class HomePageObject extends BasePage {
         return row.getCell(1).toString();
     }
 
-    public void Password(XSSFRow row) {
-        Log.allure("Input password");
-        sendKeyToElement(driver, HomeSauceDemoPageUI.PW, row.getCell(2).toString());
-    }
 
     public void selectHDDOption(String HddOption) {
         Log.allure("select HDD Option: " + HddOption);

@@ -16,10 +16,11 @@ public class TestCasesAssignment extends BaseTest {
     protected BooksPageObject booksPage;
     protected ShoppingCartPageObject shoppingCartPage;
     protected DigitalDownloadsPageObject digitalDownloadsPage;
+    protected CheckoutPageObject checkoutPage;
     public WebDriver driver;
 
     @BeforeMethod
-    public void setUp(@Optional("CHROME") String browser) {
+    public void setUp(@Optional("H_CHROME") String browser) {
         driver = getBrowserDriver(browser);
         ExcelUtil.setExcelFileSheet("Test data");
     }
@@ -82,7 +83,7 @@ public class TestCasesAssignment extends BaseTest {
         shoppingCartPage.isOnShoppingCartPage();
         shoppingCartPage.selectItem("14.1-inch Laptop");
         shoppingCartPage.clickUpdateCart();
-        Assert.assertFalse(shoppingCartPage.isItemPresent("14.1-inch Laptop"));
+        Assert.assertTrue(shoppingCartPage.isItemUndisplayed("14.1-inch Laptop"));
         Assert.assertTrue(homePage.verifyShoppingCartAmount("2"));
     }
     @Test(priority = 4)
@@ -93,5 +94,25 @@ public class TestCasesAssignment extends BaseTest {
         digitalDownloadsPage = homePage.goToDigitalDownloadsPage();
         Assert.assertTrue(digitalDownloadsPage.isOnDigitalDownloadsPage());
         digitalDownloadsPage.clickAddToCart("3rd Album");
+        Assert.assertTrue(digitalDownloadsPage.isMsgAddProductDisplayed("The product has been added to your ", "shopping cart"));
+        Assert.assertTrue(digitalDownloadsPage.verifyShoppingCartAmount("1"));
+        shoppingCartPage = digitalDownloadsPage.goToShoppingCart();
+        shoppingCartPage.isOnShoppingCartPage();
+        shoppingCartPage.agreeTermsOfService();
+        shoppingCartPage.verifyTermsOfServiceIsChecked();
+        checkoutPage = shoppingCartPage.clickCheckout();
+        Assert.assertTrue(checkoutPage.isOnCheckoutPage());
+        checkoutPage.clickCheckoutAsGuest();
+        Assert.assertTrue(checkoutPage.isOnOnePageCheckoutPage());
+        Assert.assertTrue(checkoutPage.isBillingAddressTabExpand());
+        checkoutPage.inputFirstName("Thai");
+        checkoutPage.inputLastName("Ngo");
+        checkoutPage.inputEmail("thai@gmail.com");
+        checkoutPage.selectCountry("Viet Nam");
+        checkoutPage.inputCity("Ha Noi");
+        checkoutPage.inputAddress1("Dinh Cong");
+        checkoutPage.inputZipPostal("10000");
+        checkoutPage.inputPhone("0392921517");
+        checkoutPage.clickContinueToPaymentMethod();
     }
 }

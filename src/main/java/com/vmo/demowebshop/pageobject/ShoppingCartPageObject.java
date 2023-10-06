@@ -28,13 +28,19 @@ public class ShoppingCartPageObject extends BasePage {
         clickToElement(driver, ShoppingCartPageUI.UPDATECART_BTN);
     }
 
-    public boolean isItemPresent(String itemName) {
-        Log.allure("verify item " + itemName + " is not present");
-        try {
-            driver.findElement(By.xpath(String.format(ShoppingCartPageUI.ITEM_CHECKBOX, itemName)));
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
+    public boolean isItemUndisplayed(String itemName) {
+        Log.allure("verify item " + itemName + " is not displayed");
+        return isElementUndisplayed(driver, String.format(ShoppingCartPageUI.ITEM_CHECKBOX, itemName));
+    }
+    public void agreeTermsOfService() {
+        Log.allure("agree with the terms of service");
+        checkToDefaultCheckboxOrDefaultRadio(driver,ShoppingCartPageUI.TERMS_CHECKBOX);
+    }
+    public boolean verifyTermsOfServiceIsChecked(){
+        return isElementSelected(driver,ShoppingCartPageUI.TERMS_CHECKBOX);
+    }
+    public CheckoutPageObject clickCheckout(){
+        clickToElement(driver,ShoppingCartPageUI.CHECKOUT_BTN);
+        return new CheckoutPageObject(driver);
     }
 }
