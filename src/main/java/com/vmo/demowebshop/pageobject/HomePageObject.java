@@ -79,9 +79,9 @@ public class HomePageObject extends BasePage {
         clickToElement(driver, String.format(HomePageUI.HDD_BTN, HddOption));
     }
 
-    public boolean isShoppingCartIncreaseTheAmount(String value) {
+    public boolean verifyShoppingCartAmount(String amount) {
         Log.allure("verify shopping cart increases the amount");
-        return driver.findElement(By.xpath(String.format(HomePageUI.SHOPPINGCART_QTY, value))).isDisplayed();
+        return driver.findElement(By.xpath(String.format(HomePageUI.SHOPPINGCART_QTY, amount))).isDisplayed();
     }
 
     public ShoppingCartPageObject goToShoppingCart() {

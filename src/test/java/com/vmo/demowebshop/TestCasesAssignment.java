@@ -76,14 +76,14 @@ public class TestCasesAssignment extends BaseTest {
         homePage.selectHDDOption("320 GB ");
         homePage.clickAddToCart3rdItem();
         Assert.assertTrue(homePage.isMsgAddProductDisplayed("The product has been added to your ", "shopping cart"));
-        Assert.assertTrue(homePage.isShoppingCartIncreaseTheAmount("3"));
+        Assert.assertTrue(homePage.verifyShoppingCartAmount("3"));
         homePage.scrollToTop();
         shoppingCartPage = homePage.goToShoppingCart();
         shoppingCartPage.isOnShoppingCartPage();
         shoppingCartPage.selectItem("14.1-inch Laptop");
         shoppingCartPage.clickUpdateCart();
         Assert.assertFalse(shoppingCartPage.isItemPresent("14.1-inch Laptop"));
-        Assert.assertTrue(homePage.isShoppingCartIncreaseTheAmount("2"));
+        Assert.assertTrue(homePage.verifyShoppingCartAmount("2"));
     }
     @Test(priority = 4)
     public void BuyItemSuccessfully(){
@@ -92,5 +92,6 @@ public class TestCasesAssignment extends BaseTest {
         Assert.assertTrue(homePage.isOnHomePage());
         digitalDownloadsPage = homePage.goToDigitalDownloadsPage();
         Assert.assertTrue(digitalDownloadsPage.isOnDigitalDownloadsPage());
+        digitalDownloadsPage.clickAddToCart("3rd Album");
     }
 }

@@ -13,8 +13,13 @@ public class DigitalDownloadsPageObject extends BasePage {
     public DigitalDownloadsPageObject(WebDriver driver) {
         this.driver = driver;
     }
+
     public boolean isOnDigitalDownloadsPage() {
         Log.allure("verify on Digital Downloads page");
         return driver.findElement(By.xpath(DigitalDownloadsPageUI.TITLE_DIGITAL_DOWNLOADS_PAGE)).isDisplayed();
+    }
+
+    public void clickAddToCart(String itemName) {
+        clickToElement(driver, String.format(DigitalDownloadsPageUI.ADDTOCART_ITEM, itemName));
     }
 }
