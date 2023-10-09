@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Platform;
 public class ExcelUtil {
     public static final String       testDataExcelFileName = "assignment.xlsx"; //Global test data excel file
-    public static final String       currentDir            = System.getProperty("C:\\Users\\Ngo Anh Thai\\vmo-auto");  //Main Directory of the project
+    public static final String       currentDir            = System.getProperty("C:\\Users\\ngoan\\Desktop\\vmo-auto");  //Main Directory of the project
     public static       String       testDataExcelPath     = "src\\main\\resources\\"; //Location of Test data excel file
     private static      XSSFWorkbook excelWBook; //Excel WorkBook
     private static      XSSFSheet    excelWSheet; //Excel Sheet
@@ -33,6 +33,35 @@ public class ExcelUtil {
         FileInputStream ExcelFile = new FileInputStream(testDataExcelPath + testDataExcelFileName);
         excelWBook = new XSSFWorkbook(ExcelFile);
         excelWSheet = excelWBook.getSheet(sheetName);
+    }
+    public static int getRowNumber(){
+        excelWSheet = excelWBook.getSheetAt(0);
+        return excelWSheet.getPhysicalNumberOfRows();
+    }
+    public static int getColumnNumber(){
+        excelWSheet = excelWBook.getSheetAt(0);
+        return excelWSheet.getRow(0).getLastCellNum();
+    }
+    public static String getDataValue(int rowNum, int colNum){
+        excelWSheet = excelWBook.getSheetAt(0);
+        DataFormatter formatter = new DataFormatter();
+        try {
+            return formatter.formatCellValue(excelWSheet.getRow(rowNum).getCell(colNum));
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            return "";
+        }
+    }
+    public static Object[][] getExcelData(){
+        int rowNum = getRowNumber();
+        int colNum = getColumnNumber();
+        Object[][] objects = new Object[rowNum-1][colNum];
+        for (int i = 1; i < rowNum; i++){
+            for(int j = 0; j < colNum; j++){
+                objects[i-1][j]= getDataValue(i,j);
+            }
+        }
+        return objects;
     }
     //This method reads the test data from the Excel cell.
     //We are passing row number and column number as parameters.
