@@ -23,9 +23,71 @@ public class CheckoutPageObject extends BasePage {
         return (driver.findElement(By.xpath(CheckoutPageUI.TITLE_ONE_PAGE_CHECKOUT_PAGE)).isDisplayed() && driver.findElement(By.xpath(CheckoutPageUI.BILLING_ADDRESS_TAG)).isDisplayed());
     }
 
-    public boolean isBillingAddressTabExpand() {
+    public boolean isBillingAddressTabExpanded() {
         Log.allure("verify Billing Address tab is expanded");
-        return (driver.findElement(By.xpath(CheckoutPageUI.BILLING_ADDRESS_TAG_EXPAND)).isDisplayed() && driver.findElement(By.xpath(CheckoutPageUI.FIRSTNAME_LABEL)).isDisplayed());
+        return driver.findElement(By.xpath(CheckoutPageUI.FIRSTNAME_LABEL_BILLING)).isDisplayed();
+    }
+
+    public boolean isPaymentMethodTabExpanded() {
+        Log.allure("verify Payment Method tab is expanded");
+        return driver.findElement(By.xpath(CheckoutPageUI.COD_LABEL)).isDisplayed();
+    }
+
+    public boolean isCodOptionSelected() {
+        Log.allure("verify option COD is selected");
+        return driver.findElement(By.xpath(CheckoutPageUI.COD_LABEL)).isSelected();
+    }
+
+    public boolean isPaymentInfoTabExpanded() {
+        Log.allure("verify Payment Info tab is expanded");
+        return driver.findElement(By.xpath(CheckoutPageUI.PAYMENT_INFO_TAB_EXPAND)).isDisplayed();
+    }
+
+    public boolean isConfirmOrderTabExpanded() {
+        Log.allure("verify Confirm Order tab is expanded");
+        return driver.findElement(By.xpath(CheckoutPageUI.CONFIRM_ORDER_TAB_EXPAND)).isDisplayed();
+    }
+
+    public boolean isNameCorrect(String firstName, String lastName) {
+        Log.allure("verify name is correct");
+        return driver.findElement(By.xpath(CheckoutPageUI.FIRSTNAME_LABEL_CONFIRM)).getText().equals(firstName + " " + lastName);
+    }
+
+    public boolean isEmailCorrect(String email) {
+        Log.allure("verify email is correct");
+        return driver.findElement(By.xpath(CheckoutPageUI.EMAIL_LABEL_CONFIRM)).getText().equals("Email: " + email);
+    }
+
+    public boolean isPhoneCorrect(String phoneNumber) {
+        Log.allure("verify phone number is correct");
+        return driver.findElement(By.xpath(CheckoutPageUI.PHONE_LABEL_CONFIRM)).getText().equals("Phone: " + phoneNumber);
+    }
+
+    public boolean isAddress1Correct(String address1) {
+        Log.allure("verify address 1 is correct");
+        return driver.findElement(By.xpath(CheckoutPageUI.ADDRESS1_LABEL_CONFIRM)).getText().equals(address1);
+    }
+
+    public boolean isCityZipCorrect(String city, String zip) {
+        Log.allure("verify city and zip are correct");
+        return driver.findElement(By.xpath(CheckoutPageUI.CITY_ZIP_LABEL_CONFIRM)).getText().equals(city + " , " + zip);
+    }
+
+    public boolean isCountryCorrect(String country) {
+        Log.allure("verify country is correct");
+        return driver.findElement(By.xpath(CheckoutPageUI.COUNTRY_LABEL_CONFIRM)).getText().equals(country);
+    }
+
+    public boolean isPaymentMethodCorrect(String paymentMethod) {
+        Log.allure("verify Payment Method is correct");
+        return driver.findElement(By.xpath(CheckoutPageUI.PAYMENT_METHOD_LABEL_CONFIRM)).getText().contains(paymentMethod);
+    }
+    public boolean isTotalCorrect(){
+        Log.allure("verify total is correct");
+        int subTotal = Integer.parseInt(driver.findElement(By.xpath(CheckoutPageUI.SUB_TOTAL)).getText().substring(0,1));
+        int paymentFee = Integer.parseInt(driver.findElement(By.xpath(CheckoutPageUI.PAYMENT_FEE)).getText().substring(0,1));
+        int total = subTotal + paymentFee;
+        return driver.findElement(By.xpath(CheckoutPageUI.TOTAL)).getText().substring(0,1).equals(Integer.toString(total));
     }
 
     public void clickCheckoutAsGuest() {
@@ -72,7 +134,44 @@ public class CheckoutPageObject extends BasePage {
         Log.allure("input phone number: " + phoneNumber);
         sendKeyToElement(driver, CheckoutPageUI.PHONE_FIELD, phoneNumber);
     }
-    public void clickContinueToPaymentMethod(){
-        clickToElement(driver,CheckoutPageUI.CONTINUE_BTN_BILLING);
+
+    public void clickContinueToPaymentMethod() {
+        Log.allure("continue to Payment Method");
+        clickToElement(driver, CheckoutPageUI.CONTINUE_BTN_BILLING);
+    }
+
+    public void clickContinueToPaymentInfo() {
+        Log.allure("continue to Payment Info");
+        clickToElement(driver, CheckoutPageUI.CONTINUE_BTN_PAYMENT_METHOD);
+    }
+
+    public void clickContinueToConfirmOrder() {
+        Log.allure("continue to Confirm Order");
+        clickToElement(driver, CheckoutPageUI.CONTINUE_BTN_PAYMENT_INFO);
+    }
+
+    public boolean isMsgPayByCodAppear() {
+        Log.allure("verify msg pay by COD appear");
+         return driver.findElement(By.xpath(CheckoutPageUI.PAY_COD_MSG)).getAttribute("innerHTML").equals("You will pay by COD");
+    }
+
+    public void clickConfirm() {
+        Log.allure("click Confirm");
+        clickToElement(driver,CheckoutPageUI.CONFIRM_BTN);
+    }
+
+    public boolean isOnCheckoutCompletedPage() {
+        Log.allure("verify on Checkout Completed page");
+        return driver.findElement(By.xpath(CheckoutPageUI.TITLE_CHECKOUT_COMPLETED_PAGE)).isDisplayed();
+    }
+
+    public boolean isMsgOrderSuccessfullyDisplayed() {
+        Log.allure("verify msg order successfully is displayed");
+        return driver.findElement(By.xpath(CheckoutPageUI.ORDER_SUCCESSFULLY_MSG)).isDisplayed();
+    }
+    public HomePageObject clickContinueToHomePage(){
+        Log.allure("click Continue to Home page");
+        clickToElement(driver,CheckoutPageUI.CONTINUE_TO_HOMEPAGE_BTN);
+        return new HomePageObject(driver);
     }
 }

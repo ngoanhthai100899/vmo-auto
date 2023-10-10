@@ -4,8 +4,11 @@
     <test name="Login test">
         <classes>
             <class name="com.vmo.demowebshop.TestCasesAssignment">
-                <parameter name="browser" value="CHROME"></parameter>
+                <parameter name="browser" value="H_CHROME"></parameter>
                 <methods>
+                    <include name="Buy2HighestRatedBooks"/>
+                    <include name="RemoveItemsOutOfShoppingCart"/>
+                    <include name="BuyItemSuccessfully"/>
                     <include name="Login"/>
                 </methods>
             </class>
