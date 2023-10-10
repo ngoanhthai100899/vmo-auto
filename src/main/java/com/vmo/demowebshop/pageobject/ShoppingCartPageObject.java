@@ -37,9 +37,11 @@ public class ShoppingCartPageObject extends BasePage {
         checkToDefaultCheckboxOrDefaultRadio(driver,ShoppingCartPageUI.TERMS_CHECKBOX);
     }
     public boolean verifyTermsOfServiceIsChecked(){
+        Log.allure("verify checkbox Terms of Service is checked");
         return isElementSelected(driver,ShoppingCartPageUI.TERMS_CHECKBOX);
     }
     public CheckoutPageObject clickCheckout(){
+        Log.allure("click Checkout and return to Home page");
         clickToElement(driver,ShoppingCartPageUI.CHECKOUT_BTN);
         return new CheckoutPageObject(driver);
     }

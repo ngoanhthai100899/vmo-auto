@@ -21,6 +21,7 @@ public class DigitalDownloadsPageObject extends BasePage {
     }
 
     public void clickAddToCart(String itemName) {
+        Log.allure("click add to cart: " + itemName);
         clickToElement(driver, String.format(DigitalDownloadsPageUI.ADDTOCART_ITEM, itemName));
     }
 

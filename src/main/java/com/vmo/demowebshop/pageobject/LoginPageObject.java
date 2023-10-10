@@ -45,6 +45,7 @@ public class LoginPageObject extends BasePage {
     }
 
     public void clickLogin() {
+        Log.allure("click button log in");
         clickToElement(driver,LoginPageUI.LOGIN_BTN);
     }
 }

@@ -85,6 +85,7 @@ public class HomePageObject extends BasePage {
     }
 
     public void scrollToTop() {
+        Log.allure("scroll to top page");
         scrollToTopPage(driver);
     }
 }
