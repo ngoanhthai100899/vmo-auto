@@ -28,7 +28,7 @@ public class TestNGListener implements ITestListener {
         Log.allure("---------- " + result.getName() + " FAILED test ----------");
         Object testClass = result.getInstance();
         WebDriver webDriver = ((BaseTest) testClass).getDriver();
-        saveScreenShot(webDriver);
+//        saveScreenShot(webDriver);
     }
 
     @Override

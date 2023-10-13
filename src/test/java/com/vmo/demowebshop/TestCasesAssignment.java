@@ -3,12 +3,9 @@ package com.vmo.demowebshop;
 import com.vmo.demowebshop.common.BaseTest;
 import com.vmo.demowebshop.helper.Log;
 import com.vmo.demowebshop.helper.TestNGListener;
-import com.vmo.demowebshop.interfaces.CheckoutPageUI;
 import com.vmo.demowebshop.pageobject.*;
 import com.vmo.demowebshop.utils.DataUtils;
 import com.vmo.demowebshop.utils.excelutils.ExcelUtil;
-import org.checkerframework.checker.units.qual.A;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -22,14 +19,6 @@ public class TestCasesAssignment extends BaseTest {
     protected DigitalDownloadsPageObject digitalDownloadsPage;
     protected CheckoutPageObject checkoutPage;
     public WebDriver driver;
-
-//    @BeforeMethod(alwaysRun = true)
-//    @Parameters({"browser"})
-//    public void setUp(@Optional("H_CHROME") String browser) {
-//        driver = getBrowserDriver(browser);
-//        ExcelUtil.setExcelFileSheet("TestData");
-//    }
-//
     @AfterMethod
     public void tearDown() {
         cleanBrowserAndDriver();
@@ -38,7 +27,7 @@ public class TestCasesAssignment extends BaseTest {
     @BeforeMethod(alwaysRun = true)
     @Parameters({"browser"})
     public void setUp(@Optional("H_CHROME") String browser) {
-        Log.allure("Start Browser " + browser);
+        Log.allure("Open Browser " + browser);
         driver = getBrowserDriver(browser);
     }
     @BeforeTest
